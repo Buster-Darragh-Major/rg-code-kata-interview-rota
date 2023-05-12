@@ -34,4 +34,16 @@ public class Tests
         Assert.That(interviewRota.GetNextInterviewer(0), Is.EqualTo("b"));
         Assert.That(interviewRota.GetNextInterviewer(0), Is.EqualTo("c"));
     }
+    [Test]
+    public void GetsNextPersonSkippingUnavailable()
+    {
+        var interviewRota = new InterviewRota(new[] { "a", "b", "c" });
+        
+        Assert.That(interviewRota.GetNextInterviewer(0), Is.EqualTo("a"));
+        Assert.That(interviewRota.GetNextInterviewer(0), Is.EqualTo("b"));
+        interviewRota.SetAvailability("c", false);
+        Assert.That(interviewRota.GetNextInterviewer(0), Is.EqualTo("a"));
+        interviewRota.SetAvailability("c", true);
+        Assert.That(interviewRota.GetNextInterviewer(0), Is.EqualTo("c"));
+    }
 }

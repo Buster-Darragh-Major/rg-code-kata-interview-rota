@@ -6,19 +6,19 @@ public class InterviewRota
     
     public InterviewRota(IEnumerable<string> interviewers)
     {
-        //_interviewers = interviewers.ToList();
         foreach (var interviewerName in interviewers)
         {
             _interviewers.Enqueue(new Interviewer(interviewerName));
         }
     }
 
-    public string? GetNextInterviewer(int effort)
+    public string GetNextInterviewer(int effort)
     {
         Interviewer? currentMinInterviewer = null;
         foreach (var interviewer in _interviewers)
         {
-            if (currentMinInterviewer == null || interviewer.TotalEffort < currentMinInterviewer.TotalEffort)
+            if ((interviewer.IsAvailable) &&
+                (currentMinInterviewer == null || (interviewer.TotalEffort < currentMinInterviewer.TotalEffort)))
             {
                 currentMinInterviewer = interviewer;
             }
@@ -35,5 +35,10 @@ public class InterviewRota
         
         
         return currentMinInterviewer.Name;
+    }
+
+    public void SetAvailability(string name, bool isAvailable)
+    {
+        _interviewers.First(i => i.Name == name).IsAvailable = isAvailable;
     }
 }
