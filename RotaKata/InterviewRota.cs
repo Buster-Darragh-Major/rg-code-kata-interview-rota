@@ -12,6 +12,6 @@ public class InterviewRota
 
     public string GetNextInterviewer()
     {
-        return _interviewers[_currentInterviewerIndex++];
+        return _interviewers[_currentInterviewerIndex++ % _interviewers.Count];
     }
 }
