@@ -32,5 +32,6 @@ public class Tests
         Assert.That(interviewRota.GetNextInterviewer(1), Is.EqualTo("b"));
         Assert.That(interviewRota.GetNextInterviewer(1), Is.EqualTo("c"));
         Assert.That(interviewRota.GetNextInterviewer(0), Is.EqualTo("b"));
+        Assert.That(interviewRota.GetNextInterviewer(0), Is.EqualTo("c"));
     }
 }
